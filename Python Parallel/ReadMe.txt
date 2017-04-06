@@ -3,4 +3,5 @@ How to Run the code:
 	python ParallelVersion.py > a.txt	
 - Use the following command to run the serial  version.
 	python SerialVersion.py > b.txt
-- a.txt file will be created when the first command executed and b.txt is created when the second command is Executed. The number in the file indicates the time taken by the program to complete the execution.
+- a.txt file will be created when the first command is executed and b.txt is created when the second command is executed. The number in the file indicates the time taken by the program to complete the execution.
+- You can clearly observe that the time taken by parallel version of the code is lesser than the serial version
