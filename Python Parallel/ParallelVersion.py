@@ -12,7 +12,7 @@ from multiprocessing import Process
 
 def CostlyFunction(x):
 	for i in x:
-		if i**(1 / 5.0) == 102:
+		if i**(1 / 3.0) == 102:
 			print 1
 		else:
 			pass
