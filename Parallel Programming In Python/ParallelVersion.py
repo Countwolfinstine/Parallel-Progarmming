@@ -7,15 +7,15 @@
 import time
 import random
 from multiprocessing import Pool
-from multiprocessing import Process
+from multiprocessing import Process , Queue
 
 
-def CostlyFunction(x):
+
+def CostlyFunction(x,q1):
+	arr=[]
 	for i in x:
-		if i**(1 / 3.0) == 102:
-			print 1
-		else:
-			pass
+		 arr.append(i**(1 / 3.0))
+	q1.put(arr)
 
 def GenerateRandomList():
 	arr=[]
@@ -24,14 +24,17 @@ def GenerateRandomList():
 	return arr
 
 if __name__=='__main__':
+	q1=Queue()
 	t0=time.clock()
 	List1=GenerateRandomList()
 	List2=GenerateRandomList()
-	p = Process(target=CostlyFunction,args=(List1,))
-	q = Process(target=CostlyFunction,args=(List2,))
+	p = Process(target=CostlyFunction,args=(List1,q1,))
+	q = Process(target=CostlyFunction,args=(List2,q1,))
 	q.start()
-	q.join()
 	p.start()
+	List1=q1.get()
+	List2=q1.get()
+	q.join()
 	p.join()
 	t1=time.clock()
 	print(t1-t0)

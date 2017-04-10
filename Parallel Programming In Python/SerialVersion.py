@@ -10,11 +10,10 @@ from multiprocessing import Pool
 # This is done intentionally so that the entire list is being iteated through.
 
 def CostlyFunction(x):
+	arr=[]
 	for i in x:
-		if i**(1 / 3.0) == 102:
-			print 1
-		else:
-			pass
+		 arr.append(i**(1 / 3.0))
+	return arr;
 
 def rando():
 		arr=[]
@@ -26,7 +25,7 @@ if __name__=='__main__':
 		t0=time.clock()
 		List1=rando()
 		List2=rando()
-		CostlyFunction(List1)
-		CostlyFunction(List2)
+		List1=CostlyFunction(List1)
+		List2=CostlyFunction(List2)
 		t1=time.clock()
 		print(t1-t0)
