@@ -1,7 +1,7 @@
 # Sample Python MultiProcessing Code to demonstrate the use of Process Class of multiprocessing library.
 # This Program is just written to familiarize myself with parallel programming in Python.
 # The code iterates over two randomly generated lists at the same time. 
-# Each list element is also raised to the power 1/5.0 just to make the function more computationally costly. 
+# Cube root of each element is found and put into new list which is later returned 
 # This Code is similar to writing Parallel OMP setions directive of Open MP in C programming. 
 
 import time
@@ -23,6 +23,7 @@ def GenerateRandomList():
 		arr.append(random.randint(1,101))
 	return arr
 
+# We use Queue defined in the Multiprocessing package for interprocess communication.
 if __name__=='__main__':
 	q1=Queue()
 	t0=time.clock()
