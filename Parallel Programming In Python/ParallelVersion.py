@@ -1,15 +1,12 @@
-# Sample Python MultiProcessing Code to demonstrate the use of Process Class of multiprocessing library.
-# This Program is just written to familiarize myself with parallel programming in Python.
+# Sample Python MultiProcessing Code to demonstrate the use of Process method of multiprocessing library.
 # The code iterates over two randomly generated lists at the same time. 
-# Cube root of each element is found and put into new list which is later returned 
+# Each list element is also raised to the power 1/3.0 and added to a new list which is returned int the end 
 # This Code is similar to writing Parallel OMP setions directive of Open MP in C programming. 
 
 import time
 import random
 from multiprocessing import Pool
 from multiprocessing import Process , Queue
-
-
 
 def CostlyFunction(x,q1):
 	arr=[]
@@ -23,7 +20,6 @@ def GenerateRandomList():
 		arr.append(random.randint(1,101))
 	return arr
 
-# We use Queue defined in the Multiprocessing package for interprocess communication.
 if __name__=='__main__':
 	q1=Queue()
 	t0=time.clock()
