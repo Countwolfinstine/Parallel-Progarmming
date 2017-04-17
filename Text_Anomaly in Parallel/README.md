@@ -8,6 +8,7 @@
 </ul>
 <pre>
 <p>- Flow of Anomaly.py : 
+        
         1)Find the TF/IDF of each tweet.
         
         2)Using the 1.5 IQR method to remove the outliers.
