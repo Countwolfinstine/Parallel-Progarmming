@@ -35,7 +35,7 @@ def fetch_tweets():
 
 		except IndexError:
 			continue
-
+			
 	f.close()
 	return l
 
@@ -63,7 +63,7 @@ def removeTfIdf():
 	tfidf_matrix = tfidf_vectorizer.fit_transform(sentences) #fit the vectorizer to articles
 
 	terms = tfidf_vectorizer.get_feature_names()
-	#get the distance between the articles
+	#get the distance between the tweets
 	dist = 1 - cosine_similarity(tfidf_matrix)
 
 	for i in range(len(sentences)):
@@ -113,6 +113,8 @@ def hostilityfactor(x):
 	return frac	
 
 # This function extracts the top 0.05 percentage of most hostile tweets from the data set.
+# I have used a Queue to return the required values back to the main process.
+# This function runs on a seprate process instead of the main process.
 def Hostile():
 	hos=[]
 	top=0;
@@ -130,6 +132,8 @@ def Hostile():
 		hos[hos.index(max(hos))]=0.0	
 	q1.put(li)
 
+# This is the function which does the main sentiment analysis.
+# It prints out the most positive and most negetive tweet.
 def Senti():
 	sentences = []
 	sentences_string = ""
@@ -163,18 +167,22 @@ if __name__=='__main__':
 		
 	stop = set(stopwords.words('english'))
 	
+	# Process creation and starting using Process objects and it start method.
+	# We do not need to provide any arguments in this case but we can give arguments to the target function if required.
+	
 	p = Process(target=Hostile,args=())
 	p.start()
 	q = Process(target=Senti,args=())
 	q.start()
-	l3=q1.get()
-	# l3=Hostile()
-	# sid = SentimentIntensityAnalyzer()
-
-	print "Most hostile Tweets"
 	
+	l3=q1.get()
+	
+	# This is where the main waits for both the processes to complete 
+		
 	q.join()
 	p.join()
+	
+	print "Most hostile Tweets"
 	
 	for x in l3:
 		print(arr1[x]+"\n")
