@@ -167,7 +167,7 @@ if __name__=='__main__':
 		
 	stop = set(stopwords.words('english'))
 	
-	# Process creation and starting using Process objects and it start method.
+	# Process creation and starting using Process objects and its start method.
 	# We do not need to provide any arguments in this case but we can give arguments to the target function if required.
 	
 	p = Process(target=Hostile,args=())
